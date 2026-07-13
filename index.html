@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -47,7 +48,7 @@
         <strong>Portfolio</strong>
         <span>Behance</span>
       </div>
-      <span class="pill pill-blue">See</span>
+      <span class="pill pill-green">See</span>
     </a>
 
     <a class="bento-card card-github" href="https://github.com/ipaulux" target="_blank" rel="noopener">
@@ -75,22 +76,39 @@
 
     <div class="bento-card card-map">
       <div class="map-frame">
-        <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=-0.4550%2C49.1450%2C-0.2850%2C49.2250&layer=mapnik"
-          loading="lazy"
-          title="Localisation Caen, France"></iframe>
-        <svg class="map-pin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 10.5A2.5 2.5 0 1 1 12 7.5a2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
+        <div id="map" role="img" aria-label="Carte de localisation, Caen, France"></div>
         <span class="map-label">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 10.5A2.5 2.5 0 1 1 12 7.5a2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
           Caen, France
         </span>
       </div>
-      <p class="map-credit">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</p>
+      <p class="map-credit">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors · style <a href="https://versatiles.org" target="_blank" rel="noopener">VersaTiles</a> (Shortbread)</p>
     </div>
 
   </div>
 
 </div>
+
+<script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
+<script>
+  const CAEN_CASTLE = [-0.3703, 49.1857];
+
+  const map = new maplibregl.Map({
+    container: 'map',
+    style: 'https://tiles.versatiles.org/assets/styles/colorful/style.json',
+    center: CAEN_CASTLE,
+    zoom: 4.6,
+    attributionControl: false
+  });
+
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+
+  map.on('load', () => {
+    new maplibregl.Marker({ color: '#2e4ea8' })
+      .setLngLat(CAEN_CASTLE)
+      .addTo(map);
+  });
+</script>
 
 </body>
 </html>
