@@ -1,0 +1,281 @@
+@font-face {
+  font-family: 'BC Novatica CYR';
+  src: local('BC Novatica CYR');
+  font-weight: 400 700;
+}
+
+:root {
+  --blue: #2e4ea8;
+  --blue-tint: #e3e8fb;
+  --black: #231f1e;
+  --white: #ececec;
+  --grey-tint: #eceef0;
+  --amber-tint: #fbeee0;
+  --rose-tint: #fbe8ec;
+  --radius: 22px;
+  --radius-sm: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #eef2fb 0%, #ececec 55%, #eef4ee 100%);
+  color: var(--black);
+  font-family: 'BC Novatica CYR', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+h1, .role, .card-text strong, .pill {
+  font-family: 'Montserrat', sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* APP CARD — everything lives in one continuous surface */
+.app-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 24px 60px rgba(35, 31, 30, 0.12), 0 2px 8px rgba(35, 31, 30, 0.06);
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+/* PROFILE — flows directly into the grid, no separate card boundary */
+.profile {
+  position: relative;
+  padding: 32px 24px 20px;
+  overflow: hidden;
+}
+
+.profile-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(46, 78, 168, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 78, 168, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: top right;
+  -webkit-mask-image: linear-gradient(to bottom left, black, black 30%, transparent 65%);
+  mask-image: linear-gradient(to bottom left, black, black 30%, transparent 65%);
+  pointer-events: none;
+}
+
+.avatar {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.avatar img {
+  width: 72%;
+  height: auto;
+}
+
+.profile h1 {
+  position: relative;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.15;
+}
+
+.profile h1 .script {
+  color: var(--blue);
+  font-style: italic;
+  font-weight: 800;
+}
+
+.role {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(35, 31, 30, 0.55);
+}
+
+.role svg {
+  width: 14px;
+  height: 14px;
+  color: var(--blue);
+}
+
+/* BENTO GRID */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 24px;
+}
+
+.bento-card {
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 128px;
+  transition: transform 0.15s ease;
+}
+
+.bento-card:is(a):hover {
+  transform: translateY(-2px);
+}
+
+.icon-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(35, 31, 30, 0.12);
+  flex-shrink: 0;
+}
+
+.icon-badge svg {
+  width: 17px;
+  height: 17px;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+
+.card-text strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.card-text span {
+  font-size: 11px;
+  color: rgba(35, 31, 30, 0.55);
+  word-break: break-word;
+}
+
+.pill {
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pill-blue { background: var(--blue); }
+.pill-dark { background: var(--black); }
+
+.card-linkedin { background: var(--blue-tint); }
+.card-linkedin .icon-badge svg { color: var(--blue); }
+
+.card-behance { background: #e2f2f2; }
+.card-behance .icon-badge svg { color: #0a7d8c; }
+
+.card-github { background: var(--grey-tint); }
+.card-github .icon-badge svg { color: var(--black); }
+
+.card-contact { background: var(--amber-tint); }
+.card-contact .icon-badge svg { color: var(--blue); }
+.card-contact .contact-row {
+  display: flex;
+  gap: 8px;
+}
+.card-contact .icon-badge { cursor: pointer; }
+
+/* MAP */
+.card-map {
+  grid-column: 1 / -1;
+  padding: 0;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+
+.card-map .map-frame {
+  position: relative;
+  flex: 1;
+  min-height: 150px;
+  overflow: hidden;
+}
+
+.card-map iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 60px);
+  border: none;
+}
+
+.map-credit {
+  padding: 6px 12px;
+  font-size: 9px;
+  color: rgba(35, 31, 30, 0.4);
+  background: #fff;
+}
+
+.map-credit a { text-decoration: underline; }
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 30px;
+  height: 30px;
+  color: var(--blue);
+  filter: drop-shadow(0 2px 3px rgba(35, 31, 30, 0.35));
+  pointer-events: none;
+}
+
+.map-label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.map-label svg {
+  width: 13px;
+  height: 13px;
+  color: var(--blue);
+}
+
+/* RESPONSIVE */
+@media (max-width: 380px) {
+  .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .profile { padding: 26px 20px 16px; }
+  .bento-grid { padding: 0 20px; }
+}
