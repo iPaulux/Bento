@@ -198,11 +198,6 @@ a { color: inherit; text-decoration: none; }
 
 .card-contact { background: var(--amber-tint); }
 .card-contact .icon-badge svg { color: var(--blue); }
-.card-contact .contact-row {
-  display: flex;
-  gap: 8px;
-}
-.card-contact .icon-badge { cursor: pointer; }
 
 /* MAP */
 .card-map {
@@ -263,4 +258,53 @@ a { color: inherit; text-decoration: none; }
   .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .profile { padding: 26px 20px 16px; }
   .bento-grid { padding: 0 20px; }
+}
+
+@media (min-width: 700px) {
+  body { padding: 64px 24px; }
+
+  .app-card {
+    max-width: 760px;
+    border-radius: 40px;
+  }
+
+  .profile { padding: 44px 40px 28px; }
+
+  .avatar {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 18px;
+  }
+
+  .profile h1 { font-size: 32px; }
+
+  .role { font-size: 15px; }
+
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 0 40px;
+  }
+
+  .bento-card {
+    min-height: 168px;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .icon-badge {
+    width: 38px;
+    height: 38px;
+  }
+
+  .card-text strong { font-size: 14px; }
+  .card-text span { font-size: 12px; }
+
+  .card-map {
+    min-height: 280px;
+  }
+
+  .card-map .map-frame {
+    min-height: 250px;
+  }
 }
