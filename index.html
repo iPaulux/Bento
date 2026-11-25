@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,7 +67,7 @@
       <span class="pill pill-dark">See</span>
     </a>
 
-    <a class="bento-card card-contact" href="mailto:paul.guttin@gmail.com" aria-label="Envoyer un email à Paul">
+    <a class="bento-card card-contact" href="mailto:paul.guttin@gmail.com" aria-label="Send Paul an email">
       <span class="icon-badge">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm17.4 2.6-8.4 6.3-8.4-6.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </span>
@@ -77,9 +77,74 @@
       </div>
     </a>
 
+    <!-- WORK(ED) WITH: one <li> per client, logos live in assets/logos/ -->
+    <section class="work" aria-labelledby="work-title">
+      <h2 id="work-title">Work(ed) with</h2>
+      <div class="work-marquee">
+        <div class="work-track">
+          <ul class="work-list">
+            <li class="work-item">
+              <a class="work-link" href="https://mentalrush.fr/" target="_blank" rel="noopener">
+                <img class="work-logo" src="assets/logos/mental-rush.svg" alt="">
+                <span class="work-info">
+                  <strong>Mental Rush</strong>
+                  <span>Art Director / Design Lead</span>
+                </span>
+              </a>
+            </li>
+            <li class="work-item">
+              <a class="work-link" href="https://www.project-conquerors.com/" target="_blank" rel="noopener">
+                <img class="work-logo" src="assets/logos/project-conquerors.svg" alt="">
+                <span class="work-info">
+                  <strong>Project Conquerors</strong>
+                  <span>Art Director</span>
+                </span>
+              </a>
+            </li>
+            <li class="work-item">
+              <a class="work-link" href="https://x.com/KCaenUltras" target="_blank" rel="noopener">
+                <img class="work-logo" src="assets/logos/kcaen.svg" alt="">
+                <span class="work-info">
+                  <strong>KCaen</strong>
+                  <span>Art Director &amp; Graphic Designer</span>
+                </span>
+              </a>
+            </li>
+            <li class="work-item">
+              <a class="work-link" href="https://dexup.netlify.app/" target="_blank" rel="noopener">
+                <img class="work-logo" src="assets/logos/dexup.svg" alt="">
+                <span class="work-info">
+                  <strong>Dexup</strong>
+                  <span>Art Director &amp; UX/UI Designer</span>
+                </span>
+              </a>
+            </li>
+            <li class="work-item">
+              <a class="work-link" href="https://nexxus-esports.fr/" target="_blank" rel="noopener">
+                <img class="work-logo" src="assets/logos/nexxus-esports.svg" alt="">
+                <span class="work-info">
+                  <strong>Nexxus Esports</strong>
+                  <span>Graphic Designer</span>
+                </span>
+              </a>
+            </li>
+            <li class="work-item">
+              <a class="work-link" href="https://www.lebluewall.fr/" target="_blank" rel="noopener">
+                <img class="work-logo" src="assets/logos/lebluewall.svg" alt="">
+                <span class="work-info">
+                  <strong>LeBlueWall</strong>
+                  <span>Graphic &amp; Merch Designer</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <div class="bento-card card-map">
       <div class="map-frame">
-        <div id="map" role="img" aria-label="Carte de localisation, Caen, France"></div>
+        <div id="map" role="img" aria-label="Location map, Caen, France"></div>
         <span class="map-label">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 10.5A2.5 2.5 0 1 1 12 7.5a2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
           Caen, France
@@ -111,6 +176,55 @@
       .setLngLat(CAEN_CASTLE)
       .addTo(map);
   });
+</script>
+
+<!-- Looping marquee for the "Work(ed) with" section -->
+<script>
+  (() => {
+    const marquee = document.querySelector('.work-marquee');
+    const track = marquee.querySelector('.work-track');
+    const list = track.querySelector('.work-list');
+    const originals = [...list.children];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const SPEED = 35; // pixels per second
+
+    const copy = (node) => {
+      const clone = node.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a').forEach((link) => { link.tabIndex = -1; });
+      return clone;
+    };
+
+    function build() {
+      marquee.classList.remove('is-animated');
+      track.replaceChildren(list);
+      list.replaceChildren(...originals);
+      if (reducedMotion.matches) return;
+
+      marquee.classList.add('is-animated');
+      // The list must span the full width, otherwise the loop shows a gap
+      const baseWidth = list.offsetWidth;
+      const repeats = Math.ceil(marquee.offsetWidth / baseWidth);
+      for (let i = 1; i < repeats; i++) list.append(...originals.map(copy));
+
+      track.append(copy(list));
+      track.style.animationDuration = `${list.offsetWidth / SPEED}s`;
+    }
+
+    document.fonts.ready.then(() => {
+      let lastWidth;
+      new ResizeObserver(() => {
+        if (marquee.offsetWidth === lastWidth) return;
+        lastWidth = marquee.offsetWidth;
+        build();
+      }).observe(marquee);
+    });
+    reducedMotion.addEventListener('change', build);
+    // Keyboard focus may scroll the strip: reset it so the loop stays aligned
+    marquee.addEventListener('focusout', () => {
+      if (marquee.classList.contains('is-animated')) marquee.scrollLeft = 0;
+    });
+  })();
 </script>
 
 </body>

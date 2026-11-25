@@ -1,60 +1,63 @@
 # Bento — Paul Guttin
 
-Une page one-page façon Linktree/Bento.me pour présenter Paul Guttin, art director freelance basé à Caen. Construite en HTML/CSS pur, sans framework ni build step.
+A one-page, Linktree/Bento.me style site presenting Paul Guttin, a freelance art director based in Caen, France. Built with plain HTML/CSS and a little JavaScript, with no framework or build step.
 
 <p align="center">
-  <img src="assets/mascotte.png" width="120" alt="Mascotte Paul Guttin">
+  <img src="assets/mascotte.png" width="120" alt="Paul Guttin's mascot">
 </p>
 
-## Aperçu
+## Overview
 
-La page reprend la direction artistique de la carte de visite de Paul :
+The page follows the art direction of Paul's business card:
 
-- **Palette** — bleu `#2e4ea8`, noir `#231f1e`, blanc `#ececec`
-- **Typographies** — Montserrat (titres) / BC Novatica CYR (corps de texte, avec repli système)
-- **Layout** — une grille bento : profil, réseaux (LinkedIn, Behance, GitHub, contact) et une carte de localisation sur Caen
+- **Palette**: blue `#2e4ea8`, black `#231f1e`, white `#ececec`
+- **Typefaces**: Montserrat (headings) / BC Novatica CYR (body, with a system fallback)
+- **Layout**: a bento grid with the profile, links (LinkedIn, Behance, GitHub, email), a scrolling "Work(ed) with" client strip and a map of Caen
 
-## Structure du projet
+## Project structure
 
 ```
 Bento/
-├── index.html      # Structure de la page
-├── styles.css       # Mise en page, couleurs, typographies
+├── index.html        # Page markup and scripts
+├── styles.css        # Layout, colours, typography
 ├── assets/
-│   └── mascotte.png  # Illustration de Paul
+│   ├── logos/        # Client logos (SVG)
+│   ├── mascotte.png  # Paul's mascot
+│   └── favicon*      # Favicons and touch icon
 └── README.md
 ```
 
-## Lancer le projet en local
+## Run locally
 
-Aucune dépendance à installer. Il suffit de servir le dossier en statique, par exemple :
+There is nothing to install. Serve the folder statically, for example:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-puis d'ouvrir [http://localhost:8080](http://localhost:8080).
+Then open [http://localhost:8080](http://localhost:8080).
 
-> Ouvrir `index.html` directement en double-clic fonctionne aussi, mais certains navigateurs restreignent les requêtes locales (comme l'iframe de carte) en `file://`.
+## Customise
 
-## Personnaliser
-
-| Élément | Où le modifier |
+| Element | Where to edit |
 |---|---|
-| Nom, rôle, avatar | `.profile` dans `index.html` |
-| Liens (LinkedIn, Behance, GitHub, email) | blocs `.bento-card` dans `index.html` |
-| Localisation sur la carte | paramètre `bbox` de l'iframe OpenStreetMap dans `.card-map` |
-| Couleurs des cartes | variables `--blue-tint`, `--amber-tint`, etc. et classes `.card-*` dans `styles.css` |
-| Polices | règle `@font-face` et `font-family` en haut de `styles.css` |
+| Name, role, avatar | `.profile` in `index.html` |
+| Links (LinkedIn, Behance, GitHub, email) | `.bento-card` blocks in `index.html` |
+| Clients and roles | `.work-list` in `index.html`, one `<li>` per client with its project link, logo in `assets/logos/` |
+| Scrolling speed | `SPEED` in the marquee script in `index.html` |
+| Map location and zoom | `CAEN_CASTLE` and `zoom` in the map script in `index.html` |
+| Card colours | `--blue-tint`, `--amber-tint`, etc. and the `.card-*` classes in `styles.css` |
+| Fonts | the `@font-face` rule and `font-family` declarations in `styles.css` |
 
-### À propos de la police BC Novatica CYR
+### About BC Novatica CYR
 
-C'est une police commerciale, non disponible sur Google Fonts. Le CSS tente de l'utiliser si elle est installée localement (`local('BC Novatica CYR')`), sinon la page utilise un repli système. Pour un rendu garanti sur tous les navigateurs, ajouter les fichiers `.woff2` de la police et déclarer leur chemin dans la règle `@font-face` de `styles.css`.
+This is a commercial typeface that isn't available on Google Fonts. The CSS uses it if it is installed locally (`local('BC Novatica CYR')`), otherwise the page falls back to a system font. For a consistent result in every browser, add the font's `.woff2` files and point the `@font-face` rule in `styles.css` to them.
 
-## Déployer
+## Deploy
 
-La page est 100% statique : elle peut être publiée telle quelle sur GitHub Pages, Netlify, Vercel ou tout hébergeur statique, sans étape de build.
+The site is fully static, so it can be published as is on GitHub Pages, Netlify, Vercel or any static host.
 
-## Crédits
+## Credits
 
-- Fond de carte : [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
+- Map data: [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
+- Map style and tiles: [VersaTiles](https://versatiles.org) (Shortbread schema), rendered with [MapLibre GL JS](https://maplibre.org)
