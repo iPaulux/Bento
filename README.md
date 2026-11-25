@@ -12,7 +12,7 @@ The page follows the art direction of Paul's business card:
 
 - **Palette**: blue `#2e4ea8`, black `#231f1e`, white `#ececec`
 - **Typefaces**: Montserrat (headings) / BC Novatica CYR (body, with a system fallback)
-- **Layout**: a bento grid with the profile, links (LinkedIn, Behance, GitHub, email), a scrolling "Work(ed) with" client strip and a map of Caen
+- **Layout**: a minimalist single column with the intro and freelance status, a list of links (LinkedIn, Behance, GitHub, email), a scrolling "Work(ed) with" client strip and a map of Caen, over the business card's blue grid
 
 ## Project structure
 
@@ -41,12 +41,12 @@ Then open [http://localhost:8080](http://localhost:8080).
 
 | Element | Where to edit |
 |---|---|
-| Name, role, avatar | `.profile` in `index.html` |
-| Links (LinkedIn, Behance, GitHub, email) | `.bento-card` blocks in `index.html` |
+| Name, role, avatar, freelance status | `.intro` in `index.html` |
+| Links (LinkedIn, Behance, GitHub, email) | `.links` list in `index.html` |
 | Clients and roles | `.work-list` in `index.html`, one `<li>` per client with its project link, logo in `assets/logos/` |
 | Scrolling speed | `SPEED` in the marquee script in `index.html` |
 | Map location and zoom | `CAEN_CASTLE` and `zoom` in the map script in `index.html` |
-| Card colours | `--blue-tint`, `--amber-tint`, etc. and the `.card-*` classes in `styles.css` |
+| Colours | the custom properties in `:root` at the top of `styles.css` |
 | Fonts | the `@font-face` rule and `font-family` declarations in `styles.css` |
 
 ### About BC Novatica CYR
